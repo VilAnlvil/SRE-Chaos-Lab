@@ -48,4 +48,17 @@ Este archivo es el registro histórico de operaciones, decisiones de arquitectur
 **Resultado:** ✅ Repositorio listo para ser compartido. Código funcional para demos en vivo.
 
 ---
-*Checkpoint SRE: El laboratorio ahora no solo funciona, sino que cuenta una historia de ingeniería.*
+
+## [2026-04-27] - Migración a Podman y Troubleshooting de Red
+**Acción:** 
+- Transición del runtime de contenedores de Docker a Podman (Rootless).
+- Diagnóstico de error `Recv failure: Connection reset` al consultar vía `localhost`.
+
+**Justificación & Compliance:** 
+- **Seguridad (Least Privilege):** Uso de Podman para evitar el uso de un daemon con privilegios de root.
+- **RCA (Root Cause Analysis):** Se identificó que la pila de red `slirp4netns` de Podman Rootless puede presentar conflictos con el loopback del host. Se resolvió apuntando a `0.0.0.0` o la IP de la interfaz.
+
+**Resultado:** ✅ Aplicación estable y accesible bajo Podman. Documentación de workaround incluida en README.
+
+---
+*Checkpoint SRE: Sesión finalizada con éxito. Sistema operando bajo estándares de seguridad avanzados.*
