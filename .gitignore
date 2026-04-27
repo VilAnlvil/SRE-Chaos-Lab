@@ -30,3 +30,7 @@ dist/
 # OS
 Thumbs.db
 .DS_Store
+
+# Agent Rules & Privacy
+GEMINI.md
+agent/
