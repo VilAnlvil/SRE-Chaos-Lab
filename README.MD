@@ -1,6 +1,6 @@
-# 🧪 SRE Chaos Lab (AWS Edition)
+# 🧪 Cloud Reliability & Security Lab (AWS Edition)
 
-[![SRE Validation](https://github.com/VilAnlvil/SRE-Chaos-Lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/VilAnlvil/SRE-Chaos-Lab/actions)
+[![SRE Validation](https://github.com/VilAnlvil/Cloud-Reliability-Security-Lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/VilAnlvil/Cloud-Reliability-Security-Lab/actions)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![AWS](https://img.shields.io/badge/AWS-Fargate-orange?logo=amazon-aws)
 
