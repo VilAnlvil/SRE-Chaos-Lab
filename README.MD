@@ -1,6 +1,6 @@
 # 🧪 SRE Chaos Lab (AWS Edition)
 
-[![SRE Validation](https://github.com/tu-usuario/SRE-Chaos-Lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/tu-usuario/SRE-Chaos-Lab/actions)
+[![SRE Validation](https://github.com/VilAnlvil/SRE-Chaos-Lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/VilAnlvil/SRE-Chaos-Lab/actions)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![AWS](https://img.shields.io/badge/AWS-Fargate-orange?logo=amazon-aws)
 
@@ -60,6 +60,12 @@ terraform init
 terraform apply
 ```
 
+## 📑 Root Cause Analysis (RCA) & Postmortems
+
+Un SRE senior no solo soluciona incidentes, sino que asegura que no se repitan. En este repositorio documento análisis detallados de vulnerabilidades y fallos de infraestructura:
+
+*   **[RCA: MS17-010 (EternalBlue) & Hardening](./reports/MS17-010-RCA.md):** Análisis de explotación de SMBv1, troubleshooting de interoperabilidad Ruby/NTFS y automatización de remediación vía Ansible para cumplimiento **PCI DSS 4.0.1**.
+
 ## 🧪 Caos en Acción (Evidencias)
 
 ### 📈 Monitoreo de Latencia
@@ -73,4 +79,4 @@ Registro de cómo Prometheus detecta el estado de salud de los targets en tiempo
 ![Prometheus Targets](./docs/img/prometheus-targets.png)
 
 ---
-*Desarrollado bajo principios de **SRE & AWS Well-Architected**. Este laboratorio es una prueba continua de que la visibilidad y el diseño para el fallo son las bases de la infraestructura moderna. 🚀*
+**Ingeniería de Fiabilidad en acción.** Desarrollado bajo principios de **SRE & AWS Well-Architected**. Este laboratorio es una prueba continua de que la visibilidad y el diseño para el fallo son las bases de la infraestructura moderna. 🚀
