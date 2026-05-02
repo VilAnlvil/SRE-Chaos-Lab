@@ -1,9 +1,11 @@
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Response, Depends, Security
+from fastapi.security import APIKeyHeader
 from prometheus_fastapi_instrumentator import Instrumentator
 import random
 import time
 import asyncio
 import logging
+import os
 
 # 📝 Configuración de logs para SRE (Diagnóstico de Inicio)
 logging.basicConfig(level=logging.INFO)
@@ -12,9 +14,15 @@ logger = logging.getLogger(__name__)
 logger.info("🚀 API SRE Chaos Lab iniciando...")
 
 app = FastAPI(title="SRE-Chaos-Lab", description="API diseñada para fallar y ser observada")
-
+API_KEY = os.getenv("CHAOS_API_KEY")
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+async def verify_key(key: str = Security(api_key_header)):
+    if not API_KEY:
+        raise HTTPException(status_code=500, detail="CHAOS_API_KEY not configured")
+    if key != API_KEY:
+        raise HTTPException(status_code=403, detail="Forbidden — invalid API key")
 # --- OBSERVABILIDAD: Métrica Prometheus ---
-Instrumentator().instrument(app).expose(app)
+Instrumentator().instrument(app).expose(app, endpoint="/metrics", include_in_schema=False)
 
 # Estado global del Caos
 chaos_config = {
@@ -58,21 +66,21 @@ async def chaos_middleware(request, call_next):
 # --- ENDPOINTS DE CONTROL DE CAOS ---
 
 @app.post("/chaos/latency/toggle")
-async def toggle_latency():
+async def toggle_latency(key: str = Depends(verify_key)):
     chaos_config["latency_enabled"] = not chaos_config["latency_enabled"]
     state = "ACTIVA" if chaos_config["latency_enabled"] else "DESACTIVADA"
     logger.info(f"Latencia {state}")
     return {"message": f"Inyección de latencia {state}"}
 
 @app.post("/chaos/errors/toggle")
-async def toggle_errors():
+async def toggle_errors(key: str = Depends(verify_key)):
     chaos_config["errors_enabled"] = not chaos_config["errors_enabled"]
     state = "ACTIVA" if chaos_config["errors_enabled"] else "DESACTIVADA"
     logger.info(f"Errores 500 {state}")
     return {"message": f"Inyección de errores {state}"}
 
 @app.post("/chaos/health/toggle")
-async def toggle_health():
+async def toggle_health(key: str = Depends(verify_key)):
     chaos_config["health_ok"] = not chaos_config["health_ok"]
     state = "HEALTHY" if chaos_config["health_ok"] else "UNHEALTHY"
     logger.info(f"Estado de salud cambiado a {state}")

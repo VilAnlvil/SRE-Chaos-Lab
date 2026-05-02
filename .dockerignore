@@ -1,0 +1,31 @@
+# Infraestructura — no va en la imagen de la app
+terraform/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# Reportes y assets — peso innecesario
+reports/
+assets/
+docs/
+
+# CI/CD — solo para GitHub Actions
+.github/
+
+# Dev tools — no necesarios en producción
+stress_test.py
+*.md
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secretos locales — NUNCA en la imagen
+.env
+.env.*
+.env.local
+
+# Git
+.git/
+.gitignore

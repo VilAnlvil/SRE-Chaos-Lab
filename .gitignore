@@ -34,3 +34,6 @@ Thumbs.db
 # Agent Rules & Privacy
 GEMINI.md
 agent/
+
+#Remediation
+security-remediation.md
